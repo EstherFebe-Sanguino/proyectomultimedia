@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CursoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,31 +14,28 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
+
 /* primera ruta la principal */
-Route::get('/', function () {
-   /* return view('welcome');*/
-   return "Bienvenido a la pagina principal";
-});
+Route::get('/', HomeController::class);
 
 /* segunda ruta */
-Route::get('cursos' , function () {
-    return "Bienvenido a la pagina cursos";
-});
+Route::get('cursos' , [CursoController::class, 'index']);
 
 /* tercera ruta */
-Route::get('cursos/create', function () {
-    return "En esta pagina podras crear un curso";
-});
+Route::get('cursos/create', [CursoController::class, 'create']);
 
 /* cuarta ruta: mandando una variable por la url llamada curso ala ruta cursos*/
-Route::get('cursos/{curso}' , function ($curso) {
-    return "Bienvenido al curso: $curso";
-});
+Route::get('cursos/{curso}' , [CursoController::class, 'show']);
 
-/*quinta ruta:podemos pasar mas de una variable a una url */
+
+
+/* /*quinta ruta:podemos pasar mas de una variable a una url 
 Route::get('cursos/{curso}/{categoria}', function ($curso,$categoria) {
     return"Bienvenido al curso $curso, de la categoria $categoria";
-});
+}); */
 
 Route::get('/dashboard', function () {
     return view('dashboard');
